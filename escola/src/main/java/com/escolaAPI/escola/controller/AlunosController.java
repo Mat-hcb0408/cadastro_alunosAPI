@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ import com.escolaAPI.escola.model.AlunosModel;
 import com.escolaAPI.escola.service.AlunosService;
 
 
-
+@CrossOrigin(origins="http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/alunos")
 public class AlunosController {
@@ -49,7 +50,7 @@ public class AlunosController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AlunosModel>deletar(@PathVariable Long id, @RequestBody AlunosModel alunosModel){
+    public ResponseEntity<Void>deletar(@PathVariable Long id){
         if(!service.buscarID(id).isPresent()){
             return ResponseEntity.notFound().build();
         }
